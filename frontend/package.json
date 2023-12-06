@@ -2,7 +2,7 @@
     "name": "frontend",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://10.19.49.48:4000",
+    "proxy": "http://127.0.0.1:4000",
     "dependencies": {
         "@material-ui/core": "^4.12.4",
         "@material-ui/icons": "^4.11.3",

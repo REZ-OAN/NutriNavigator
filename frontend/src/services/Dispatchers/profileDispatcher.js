@@ -35,23 +35,6 @@ export const updatePasswordReset = () => {
         type: UPDATE_PASSWORD_RESET,
     };
 };
-export const updateUserRequest = () => {
-    return {
-        type: UPDATE_USER_REQUEST,
-    };
-};
-export const updateUserSuccess = (data) => {
-    return {
-        type: UPDATE_USER_SUCCESS,
-        payload: data.success,
-    };
-};
-export const updateUserFail = (error) => {
-    return {
-        type: UPDATE_USER_FAIL,
-        payload: error.response.data.error.message,
-    };
-};
 
 export const updateProfileRequest = () => {
     return {
