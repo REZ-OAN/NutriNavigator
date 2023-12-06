@@ -8,6 +8,7 @@ const Profile = () => {
     const { user, loading, isAuthenticated } = useSelector(
         (state) => state.userR
     );
+    console.log(user["name"]);
     const navigate = useNavigate();
     useEffect(() => {
         if (isAuthenticated === false) {

@@ -17,6 +17,7 @@ import { loadUser } from "./services/Actions/userAction.js";
 import Profile from "./components/Profile/Profile.jsx";
 import UpdateProfile from "./components/Profile/UpdateProfile.jsx";
 import UpdatePassword from "./components/Profile/UpdatePassword.jsx";
+import ProtectedRoute from "./utils/routes/ProtectedRoute.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -45,7 +46,9 @@ function App() {
                     <Route path="/products/:keyword" element={<Products />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile" element={<ProtectedRoute />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
                     <Route path="/profile/update" element={<UpdateProfile />} />
                     <Route
                         path="/password/update"
