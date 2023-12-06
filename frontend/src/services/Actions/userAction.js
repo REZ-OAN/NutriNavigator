@@ -11,6 +11,12 @@ import {
     load_success,
     logout_success,
     logout_fail,
+    forgot_password_request,
+    forgot_password_success,
+    forgot_password_fail,
+    reset_password_request,
+    reset_password_success,
+    reset_password_fail,
 } from "../Dispatchers/userDispatcher";
 import axios from "axios";
 
@@ -53,6 +59,37 @@ export const logoutUser = async (dispatch) => {
         dispatch(logout_success());
     } catch (error) {
         dispatch(logout_fail(error));
+    }
+};
+export const forgotPassword = async (dispatch, email) => {
+    try {
+        dispatch(forgot_password_request());
+        const config = { Headers: { "Content-Type": "application/json" } };
+        const { data } = await axios.post(
+            "/api/v1/password/forgot",
+            email,
+            config
+        );
+        dispatch(forgot_password_success(data));
+    } catch (error) {
+        dispatch(forgot_password_fail(error));
+    }
+};
+export const resetPassword = async (dispatch, token, passwords) => {
+    try {
+        dispatch(reset_password_request());
+
+        const config = { headers: { "Content-Type": "application/json" } };
+
+        const { data } = await axios.put(
+            `/api/v1/password/reset/${token}`,
+            passwords,
+            config
+        );
+
+        dispatch(reset_password_success(data.success));
+    } catch (error) {
+        dispatch(reset_password_fail(error));
     }
 };
 export const clearErrors = async (dispatch) => {

@@ -18,6 +18,8 @@ import Profile from "./components/Profile/Profile.jsx";
 import UpdateProfile from "./components/Profile/UpdateProfile.jsx";
 import UpdatePassword from "./components/Profile/UpdatePassword.jsx";
 import ProtectedRoute from "./utils/routes/ProtectedRoute.jsx";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword.jsx";
+import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -49,10 +51,25 @@ function App() {
                     <Route path="/profile" element={<ProtectedRoute />}>
                         <Route path="/profile" element={<Profile />} />
                     </Route>
-                    <Route path="/profile/update" element={<UpdateProfile />} />
+                    <Route path="/profile/update" element={<ProtectedRoute />}>
+                        <Route
+                            path="/profile/update"
+                            element={<UpdateProfile />}
+                        />
+                    </Route>
+                    <Route path="/password/update" element={<ProtectedRoute />}>
+                        <Route
+                            path="/password/update"
+                            element={<UpdatePassword />}
+                        />
+                    </Route>
                     <Route
-                        path="/password/update"
-                        element={<UpdatePassword />}
+                        path="/password/forgot"
+                        element={<ForgotPassword />}
+                    />
+                    <Route
+                        path="/password/reset/:token"
+                        element={<ResetPassword />}
                     />
                 </Routes>
                 <ToastContainer />

@@ -11,6 +11,12 @@ import {
     LOAD_USER_SUCCESS,
     LOGOUT_FAIL,
     LOGOUT_SUCCESS,
+    FORGOT_PASSWORD_FAIL,
+    FORGOT_PASSWORD_REQUEST,
+    FORGOT_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAIL,
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
 } from "../Constants/userActionTypes";
 export const login_fail = (error) => {
     return {
@@ -72,6 +78,40 @@ export const logout_fail = (error) => {
     return {
         type: LOGOUT_FAIL,
         payload: error.response.data.error.message,
+    };
+};
+export const forgot_password_fail = (error) => {
+    return {
+        type: FORGOT_PASSWORD_FAIL,
+        payload: error.response.data.error.message,
+    };
+};
+export const forgot_password_success = (data) => {
+    return {
+        type: FORGOT_PASSWORD_SUCCESS,
+        payload: data.message,
+    };
+};
+export const forgot_password_request = () => {
+    return {
+        type: FORGOT_PASSWORD_REQUEST,
+    };
+};
+export const reset_password_fail = (error) => {
+    return {
+        type: RESET_PASSWORD_FAIL,
+        payload: error.response.data.error.message,
+    };
+};
+export const reset_password_success = (data) => {
+    return {
+        type: RESET_PASSWORD_SUCCESS,
+        payload: data,
+    };
+};
+export const reset_password_request = () => {
+    return {
+        type: RESET_PASSWORD_REQUEST,
     };
 };
 export const clearErrors = () => {

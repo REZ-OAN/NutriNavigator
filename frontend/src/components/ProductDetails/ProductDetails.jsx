@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,11 +15,22 @@ import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.jsx";
 import Loader from "../layouts/Loader/Loader.jsx";
 const ProductDetails = () => {
+    const [itemCount, setItemCount] = useState(1);
     const { id } = useParams();
     const popError = (error) => {
         toast.error(error, {
             ...toastifyOptions,
         });
+    };
+    const incCount = (e) => {
+        e.preventDefault();
+        setItemCount((prevState) => prevState + 1);
+    };
+    const decCount = (e) => {
+        e.preventDefault();
+        setItemCount((prevState) =>
+            prevState === 1 ? prevState : prevState - 1
+        );
     };
     const dispatch = useDispatch();
     const { loading, error, product } = useSelector((state) => state.productR);
@@ -74,9 +85,12 @@ const ProductDetails = () => {
                                 <h1>{`৳‎${product.price}`}</h1>
                                 <div className="detailsBlock-3-1">
                                     <div className="detailsBlock-3-1-1">
-                                        <button>-</button>
-                                        <input value="1" type="number" />
-                                        <button>+</button>
+                                        <button onClick={decCount}>-</button>
+                                        <input
+                                            value={itemCount}
+                                            type="number"
+                                        />
+                                        <button onClick={incCount}>+</button>
                                     </div>{" "}
                                     <button>Add To Cart</button>
                                 </div>
