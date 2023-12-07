@@ -1,7 +1,13 @@
 import React, { Fragment } from "react";
 import "../header.css";
 import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
-import { MdDashboard, MdPerson, MdExitToApp, MdListAlt } from "react-icons/md";
+import {
+    MdDashboard,
+    MdPerson,
+    MdExitToApp,
+    MdListAlt,
+    MdShoppingCart,
+} from "react-icons/md";
 import { Backdrop } from "@material-ui/core";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,9 +16,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../../services/Actions/userAction";
+
 const UserOptions = ({ user }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { cartItems } = useSelector((state) => state.cartR);
     const popSuccess = () => {
         toast.success(`Logout Successfull`, { ...toastifyOptions });
     };
@@ -27,6 +35,9 @@ const UserOptions = ({ user }) => {
     const dashboard = () => {
         navigate("/dashboard");
     };
+    const cart = () => {
+        navigate("/cart");
+    };
     const logout = () => {
         logoutUser(dispatch);
         if (error) {
@@ -38,14 +49,19 @@ const UserOptions = ({ user }) => {
     };
 
     const options = [
-        { icon: <MdListAlt />, name: "Orders", func: orders },
-        { icon: <MdPerson />, name: "Profile", func: profile },
-        { icon: <MdExitToApp />, name: "Sign Out", func: logout },
+        { icon: <MdListAlt />, name: "orders", func: orders },
+        { icon: <MdPerson />, name: "profile", func: profile },
+        { icon: <MdExitToApp />, name: "logout", func: logout },
+        {
+            icon: <MdShoppingCart />,
+            name: `cart(${cartItems.length})`,
+            func: cart,
+        },
     ];
     if (user.role === "admin") {
         options.unshift({
             icon: <MdDashboard />,
-            name: "Dashboard",
+            name: "dashboard",
             func: dashboard,
         });
     }
@@ -75,6 +91,7 @@ const UserOptions = ({ user }) => {
                         icon={option.icon}
                         tooltipTitle={option.name}
                         onClick={option.func}
+                        tooltipOpen={window.innerWidth <= 600 ? true : false}
                     />
                 ))}
             </SpeedDial>

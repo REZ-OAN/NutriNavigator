@@ -20,6 +20,7 @@ import UpdatePassword from "./components/Profile/UpdatePassword.jsx";
 import ProtectedRoute from "./utils/routes/ProtectedRoute.jsx";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword.jsx";
 import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
+import Cart from "./components/Cart/Cart.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -71,6 +72,7 @@ function App() {
                         path="/password/reset/:token"
                         element={<ResetPassword />}
                     />
+                    <Route path="/cart" element={<Cart />} />
                 </Routes>
                 <ToastContainer />
                 <Footer />

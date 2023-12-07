@@ -1,7 +1,7 @@
 import { ReactNavbar } from "overlay-navbar";
 import { MdAccountCircle } from "react-icons/md/index.esm";
 import { MdSearch } from "react-icons/md/index.esm";
-import { MdAddShoppingCart } from "react-icons/md/index.esm";
+import { MdShoppingCart } from "react-icons/md/index.esm";
 import logo from "../../../images/logos/brandlogo.png";
 import { useSelector } from "react-redux";
 function Header() {
@@ -40,7 +40,7 @@ function Header() {
         SearchIconElement: MdSearch,
         cartIcon: true,
         cartIconColor: "#82954B",
-        CartIconElement: MdAddShoppingCart,
+        CartIconElement: MdShoppingCart,
         profileIconUrl,
         cartIconUrl: "/cart",
         profileIconColorHover: "213363",

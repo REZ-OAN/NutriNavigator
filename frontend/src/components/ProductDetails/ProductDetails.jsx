@@ -40,7 +40,7 @@ const ProductDetails = () => {
     const addToCartHandler = (e) => {
         e.preventDefault();
         addItemsToCart(dispatch, id, itemCount);
-        toast.success(`${product.name} added to cart`);
+        toast.success(`${product.name} added to cart`, { ...toastifyOptions });
     };
     useEffect(() => {
         if (error) {
