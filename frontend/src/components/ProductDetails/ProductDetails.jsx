@@ -14,7 +14,10 @@ import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.jsx";
 import Loader from "../layouts/Loader/Loader.jsx";
+import { addItemsToCart } from "../../services/Actions/cartActions.js";
 const ProductDetails = () => {
+    const dispatch = useDispatch();
+    const { loading, error, product } = useSelector((state) => state.productR);
     const [itemCount, setItemCount] = useState(1);
     const { id } = useParams();
     const popError = (error) => {
@@ -24,7 +27,9 @@ const ProductDetails = () => {
     };
     const incCount = (e) => {
         e.preventDefault();
-        setItemCount((prevState) => prevState + 1);
+        setItemCount((prevState) =>
+            prevState + 1 > product.stock ? prevState : prevState + 1
+        );
     };
     const decCount = (e) => {
         e.preventDefault();
@@ -32,8 +37,11 @@ const ProductDetails = () => {
             prevState === 1 ? prevState : prevState - 1
         );
     };
-    const dispatch = useDispatch();
-    const { loading, error, product } = useSelector((state) => state.productR);
+    const addToCartHandler = (e) => {
+        e.preventDefault();
+        addItemsToCart(dispatch, id, itemCount);
+        toast.success(`${product.name} added to cart`);
+    };
     useEffect(() => {
         if (error) {
             popError();
@@ -87,12 +95,15 @@ const ProductDetails = () => {
                                     <div className="detailsBlock-3-1-1">
                                         <button onClick={decCount}>-</button>
                                         <input
+                                            readOnly
                                             value={itemCount}
                                             type="number"
                                         />
                                         <button onClick={incCount}>+</button>
                                     </div>{" "}
-                                    <button>Add To Cart</button>
+                                    <button onClick={addToCartHandler}>
+                                        Add To Cart
+                                    </button>
                                 </div>
                                 <p>
                                     Status:{" "}

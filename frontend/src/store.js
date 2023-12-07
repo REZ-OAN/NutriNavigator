@@ -9,6 +9,7 @@ import { userReducer } from "./services/Reducers/userReducer.js";
 import { profileReducer } from "./services/Reducers/profileReducer.js";
 import forgotPasswordReducer from "./services/Reducers/forgotPasswordReducer.js";
 import resetPasswordReducer from "./services/Reducers/resetPasswordReducer.js";
+import { cartReducer } from "./services/Reducers/cartReducer.js";
 
 const reducer = combineReducers({
     productsR: productReducer,
@@ -17,9 +18,16 @@ const reducer = combineReducers({
     profileR: profileReducer,
     forgotPasswordR: forgotPasswordReducer,
     resetPasswordR: resetPasswordReducer,
+    cartR: cartReducer,
 });
 
-let initialState = {};
+let initialState = {
+    cartR: {
+        cartItems: localStorage.getItem("cartItems")
+            ? JSON.parse(localStorage.getItem("cartItems"))
+            : [],
+    },
+};
 const middleware = [thunk];
 
 const store = createStore(
