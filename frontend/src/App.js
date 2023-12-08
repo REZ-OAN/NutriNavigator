@@ -21,6 +21,7 @@ import ProtectedRoute from "./utils/routes/ProtectedRoute.jsx";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword.jsx";
 import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
 import Cart from "./components/Cart/Cart.jsx";
+import ShippingInfo from "./components/Cart/ShippingInfo.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -73,6 +74,9 @@ function App() {
                         element={<ResetPassword />}
                     />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/shipping" element={<ProtectedRoute />}>
+                        <Route path="/shipping" element={<ShippingInfo />} />
+                    </Route>
                 </Routes>
                 <ToastContainer />
                 <Footer />

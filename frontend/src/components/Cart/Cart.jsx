@@ -15,6 +15,7 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { cartItems } = useSelector((state) => state.cartR);
+
     const increaseQuantity = (id, name, quantity, stock) => {
         const newQty = quantity + 1;
         if (stock <= quantity) {

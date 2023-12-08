@@ -94,6 +94,11 @@ const Login = () => {
             loginTab.current.classList.add("shiftToLeft");
         }
     };
+
+    const queryString = window.location.search
+        ? window.location.search.split("=")[1]
+        : "profile";
+    console.log(window.location.search.split("=")[1]);
     useEffect(() => {
         if (error) {
             popError();
@@ -101,9 +106,9 @@ const Login = () => {
         }
         if (isAuthenticated) {
             popSuccess("Authenticated User Access");
-            navigate("/profile");
+            navigate(`/${queryString}`);
         }
-    }, [error, dispatch, isAuthenticated, navigate]);
+    }, [error, dispatch, isAuthenticated, queryString, navigate]);
     return (
         <Fragment>
             <MetaData title={"Sign In - Nutrinavigator"} />
