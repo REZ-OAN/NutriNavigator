@@ -24,7 +24,7 @@ router.route("/register").post(registerUser);
 // login
 router.route("/login").post(loginUser);
 // logout
-router.route("/logout").get(logoutUser);
+router.route("/logout").get(isAuthenticatedUser, logoutUser);
 // forgetpassword
 router.route("/password/forgot").post(forgotPassword);
 // reset password

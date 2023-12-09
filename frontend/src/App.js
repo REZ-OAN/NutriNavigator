@@ -22,6 +22,7 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword.jsx";
 import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
 import Cart from "./components/Cart/Cart.jsx";
 import ShippingInfo from "./components/Cart/ShippingInfo.jsx";
+import ConfirmOrder from "./components/Cart/ConfirmOrder.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -76,6 +77,12 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/shipping" element={<ProtectedRoute />}>
                         <Route path="/shipping" element={<ShippingInfo />} />
+                    </Route>
+                    <Route path="/order/confirm" element={<ProtectedRoute />}>
+                        <Route
+                            path="/order/confirm"
+                            element={<ConfirmOrder />}
+                        />
                     </Route>
                 </Routes>
                 <ToastContainer />
