@@ -24,6 +24,8 @@ import Cart from "./components/Cart/Cart.jsx";
 import ShippingInfo from "./components/Cart/ShippingInfo.jsx";
 import ConfirmOrder from "./components/Cart/ConfirmOrder.jsx";
 import ProcessPayment from "./components/Cart/ProcessPayment.jsx";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 function App() {
     const dispatch = useDispatch();
@@ -48,6 +50,7 @@ function App() {
                 <Header />
 
                 {isAuthenticated && <UserOptions user={user["user"]} />}
+
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route
@@ -92,12 +95,21 @@ function App() {
                             element={<ConfirmOrder />}
                         />
                     </Route>
-                    <Route path="/process/payment" element={<ProtectedRoute />}>
+                    {stripeApi && (
                         <Route
                             path="/process/payment"
-                            element={<ProcessPayment />}
-                        />
-                    </Route>
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/process/payment"
+                                element={
+                                    <Elements stripe={loadStripe(stripeApi)}>
+                                        <ProcessPayment />
+                                    </Elements>
+                                }
+                            />
+                        </Route>
+                    )}
                 </Routes>
                 <ToastContainer />
                 <Footer />

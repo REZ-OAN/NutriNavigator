@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose, { mongo, now } from "mongoose";
 
 const orderSchema = new mongoose.Schema({
     shippinginfo: {
@@ -10,11 +10,11 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        postalcode: {
+        pinCode: {
             type: Number,
             required: true,
         },
-        phone: {
+        phoneNo: {
             type: String,
             required: true,
         },
@@ -62,6 +62,7 @@ const orderSchema = new mongoose.Schema({
     paidat: {
         type: Date,
         required: true,
+        default: Date.now,
     },
     itemsprice: { type: Number, default: 0 },
     tax: { type: Number, default: 0 },
