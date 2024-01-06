@@ -27,7 +27,7 @@ const UserOptions = ({ user }) => {
     const { error } = useSelector((state) => state.userR);
     const [open, setOpen] = useState(false);
     const orders = () => {
-        navigate("/orders");
+        navigate("/orders/me");
     };
     const profile = () => {
         navigate("/profile");

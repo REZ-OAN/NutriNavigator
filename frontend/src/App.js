@@ -27,13 +27,20 @@ import ProcessPayment from "./components/Cart/ProcessPayment.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import Success from "./components/Cart/Success.jsx";
+import MyOrders from "./components/orders/MyOrders.jsx";
+import OrderDetails from "./components/orders/OrderDetails.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
     const [stripeApi, setStripeApi] = useState();
     async function getStripeApiKey() {
-        const { data } = await axios.get("/api/v1/stripeapikey");
-        setStripeApi(data.apiKey);
+        try {
+            const { data } = await axios.get("/api/v1/stripeapikey");
+            setStripeApi(data.apiKey);
+        } catch (error) {
+            console.log(error.response.data.error);
+        }
     }
     useEffect(() => {
         WebFont.load({
@@ -42,6 +49,7 @@ function App() {
             },
         });
         loadUser(dispatch);
+
         getStripeApiKey();
     }, [dispatch]);
     return (
@@ -94,6 +102,16 @@ function App() {
                             path="/order/confirm"
                             element={<ConfirmOrder />}
                         />
+                    </Route>
+                    <Route path="/success" element={<ProtectedRoute />}>
+                        <Route path="/success" element={<Success />} />
+                    </Route>
+
+                    <Route path="/orders/me" element={<ProtectedRoute />}>
+                        <Route path="/orders/me" element={<MyOrders />} />
+                    </Route>
+                    <Route path="/order/:id" element={<ProtectedRoute />}>
+                        <Route path="/order/:id" element={<OrderDetails />} />
                     </Route>
                     {stripeApi && (
                         <Route

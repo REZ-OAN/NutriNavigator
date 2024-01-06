@@ -1,5 +1,5 @@
 import React from "react";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from "@material-ui/lab";
 const ReviewCard = ({ review }) => {
     const options = {
         edit: false,
@@ -14,7 +14,15 @@ const ReviewCard = ({ review }) => {
             <div className="reviewCard">
                 <img src="" alt="User" />
                 <p>{review.name}</p>
-                {review.rating && <ReactStars {...options} />}
+                {review.rating && (
+                    <Rating
+                        name="read-only"
+                        value={review.rating}
+                        precision={0.5}
+                        size="small"
+                        readOnly
+                    />
+                )}
                 <span>{review.comment}</span>
             </div>
         </>

@@ -30,6 +30,7 @@ const ProcessPayment = () => {
     const { user } = useSelector((state) => state.userR);
     const { error } = useSelector((state) => state.newOrderR);
     const navigate = useNavigate();
+    console.log(stripe);
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100),
     };
@@ -89,9 +90,11 @@ const ProcessPayment = () => {
                         id: result.paymentIntent.id,
                         status: result.paymentIntent.status,
                     };
-
+                    toast.success("Payment Process Successful", {
+                        ...toastifyOptions,
+                    });
                     createOrder(dispatch, order);
-                    navigate("/successs");
+                    navigate("/success");
                 } else {
                     toast.error(
                         "There's some issue while processing payment ",
@@ -139,7 +142,7 @@ const ProcessPayment = () => {
 
                     <input
                         type="submit"
-                        value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
+                        value={`Pay - ৳‎${orderInfo && orderInfo.totalPrice}`}
                         ref={payBtn}
                         className="paymentFormBtn"
                     />
