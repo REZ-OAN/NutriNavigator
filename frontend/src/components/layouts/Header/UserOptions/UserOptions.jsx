@@ -33,7 +33,7 @@ const UserOptions = ({ user }) => {
         navigate("/profile");
     };
     const dashboard = () => {
-        navigate("/dashboard");
+        navigate("/admin/dashboard");
     };
     const cart = () => {
         navigate("/cart");

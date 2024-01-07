@@ -4,6 +4,7 @@ import {
     createProductReview,
     deleteProduct,
     deleteReviews,
+    getAllAdminProducts,
     getAllProducts,
     getAllReviews,
     getProduct,
@@ -24,6 +25,9 @@ router
 
 // get all the products -- User and Admin
 router.route("/products").get(getAllProducts);
+router
+    .route("/admin/products")
+    .get(isAuthenticatedUser, authorizeRoles("admin"), getAllAdminProducts);
 
 // product update & delete -- Admin
 router

@@ -30,6 +30,10 @@ import axios from "axios";
 import Success from "./components/Cart/Success.jsx";
 import MyOrders from "./components/orders/MyOrders.jsx";
 import OrderDetails from "./components/orders/OrderDetails.jsx";
+import Dashboard from "./components/Admin/Dashboard/Dashboard.jsx";
+import ProductList from "./components/Admin/ProductList/ProductList.jsx";
+import NewProduct from "./components/Admin/NewProduct/NewProduct.jsx";
+import UpdateProduct from "./components/Admin/UpdateProduct/UpdateProduct.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -125,6 +129,50 @@ function App() {
                                         <ProcessPayment />
                                     </Elements>
                                 }
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/dashboard"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/dashboard"
+                                element={<Dashboard />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/products"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/products"
+                                element={<ProductList />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/product"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/product"
+                                element={<NewProduct />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/product/:id"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/product/:id"
+                                element={<UpdateProduct />}
                             />
                         </Route>
                     )}

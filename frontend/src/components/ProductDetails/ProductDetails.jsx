@@ -83,14 +83,6 @@ const ProductDetails = () => {
         }
         getProductDetails(dispatch, id);
     }, [dispatch, error, id, reviewError, success]);
-    const options = {
-        edit: false,
-        color: "rgb(201, 193, 193,.5)",
-        activeColor: "#8EAC50",
-        size: window.innerWidth < 600 ? 15 : 20,
-        value: product.rating,
-        isHalf: true,
-    };
     return (
         <Fragment>
             {loading ? (
@@ -100,20 +92,19 @@ const ProductDetails = () => {
                     <MetaData title={`${product.name}-NutriNavigator`} />
                     <div className="ProductDetails">
                         <div>
-                            <Carousel>
+                            <Carousel className="carousel">
                                 {product.images &&
-                                    product.images.map((item, i) => {
-                                        return (
-                                            <img
-                                                className="CarouselImage"
-                                                key={item.url}
-                                                src={item.url}
-                                                alt={`${i} Slide`}
-                                            />
-                                        );
-                                    })}
+                                    product.images.map((item, i) => (
+                                        <img
+                                            className="CarouselImage"
+                                            key={i}
+                                            src={item.url}
+                                            alt={`${i} Slide`}
+                                        />
+                                    ))}
                             </Carousel>
                         </div>
+
                         <div>
                             <div className="detailsBlock-1">
                                 <h2>{product.name}</h2>
