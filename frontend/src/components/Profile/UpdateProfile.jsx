@@ -71,7 +71,7 @@ const UpdateProfile = () => {
             navigate("/profile");
             dispatch(updateProfileReset());
         }
-    }, [dispatch, error, user, isUpdated]);
+    }, [dispatch, error, user, navigate, isUpdated]);
     return (
         <Fragment>
             {loading ? (

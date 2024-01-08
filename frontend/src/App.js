@@ -34,6 +34,11 @@ import Dashboard from "./components/Admin/Dashboard/Dashboard.jsx";
 import ProductList from "./components/Admin/ProductList/ProductList.jsx";
 import NewProduct from "./components/Admin/NewProduct/NewProduct.jsx";
 import UpdateProduct from "./components/Admin/UpdateProduct/UpdateProduct.jsx";
+import OrderList from "./components/Admin/OrderList/OrderList.jsx";
+import OrderUpdate from "./components/Admin/OrderUpdate/OrderUpdate.jsx";
+import UsersList from "./components/Admin/UsersList/UsersList.jsx";
+import ReviewList from "./components/Admin/ReviewsList/ReviewList.jsx";
+import UpdateUser from "./components/Admin/UpdateUser/UpdateUser.jsx";
 function App() {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.userR);
@@ -173,6 +178,58 @@ function App() {
                             <Route
                                 path="/admin/product/:id"
                                 element={<UpdateProduct />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/orders"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/orders"
+                                element={<OrderList />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route path="/admin/users" element={<ProtectedRoute />}>
+                            <Route
+                                path="/admin/users"
+                                element={<UsersList />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/user/:id"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/user/:id"
+                                element={<UpdateUser />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/reviews"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/reviews"
+                                element={<ReviewList />}
+                            />
+                        </Route>
+                    )}
+                    {user?.user?.role === "admin" && (
+                        <Route
+                            path="/admin/order/:id"
+                            element={<ProtectedRoute />}
+                        >
+                            <Route
+                                path="/admin/order/:id"
+                                element={<OrderUpdate />}
                             />
                         </Route>
                     )}

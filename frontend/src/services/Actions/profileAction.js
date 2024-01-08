@@ -1,12 +1,8 @@
 import axios from "axios";
 import {
     updateProfileFail,
-    updateUserFail,
     updateProfileRequest,
     updateProfileSuccess,
-    updateUserRequest,
-    updateUserReset,
-    updateUserSuccess,
     clearErrors as CLEAR_ERRORS,
     updatePasswordFail,
     updatePasswordRequest,

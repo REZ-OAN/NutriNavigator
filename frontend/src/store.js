@@ -7,16 +7,25 @@ import {
     newReviewReducer,
     newProductReducer,
     productUpdateReducer,
+    allReviewsReducer,
+    reviewReducer,
 } from "./services/Reducers/productReducer.js";
-import { userReducer } from "./services/Reducers/userReducer.js";
+import {
+    userReducer,
+    userDetailsReducer,
+    userUDReducer,
+    allUsersReducer,
+} from "./services/Reducers/userReducer.js";
 import { profileReducer } from "./services/Reducers/profileReducer.js";
 import forgotPasswordReducer from "./services/Reducers/forgotPasswordReducer.js";
 import resetPasswordReducer from "./services/Reducers/resetPasswordReducer.js";
 import { cartReducer } from "./services/Reducers/cartReducer.js";
 import {
+    allOrdersReducer,
     myOrdersReducer,
     newOrderReducer,
     orderDetailsReducer,
+    orderReducer,
 } from "./services/Reducers/orderReducer.js";
 
 const reducer = combineReducers({
@@ -31,8 +40,15 @@ const reducer = combineReducers({
     cartR: cartReducer,
     newOrderR: newOrderReducer,
     myOrderR: myOrdersReducer,
+    ordersAR: allOrdersReducer,
+    userDUR: userUDReducer,
+    userDeR: userDetailsReducer,
+    usersAR: allUsersReducer,
+    orderDUR: orderReducer,
     orderDetailsR: orderDetailsReducer,
     newReviewR: newReviewReducer,
+    reviews: allReviewsReducer,
+    reviewDel: reviewReducer,
 });
 
 let initialState = {

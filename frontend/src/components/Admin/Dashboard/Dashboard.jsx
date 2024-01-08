@@ -4,14 +4,22 @@ import MetaData from "../../layouts/Header/MetaData";
 import Sidebar from "../Sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllAdminProducts } from "../../../services/Actions/productAction.js";
+import { getAllOrders } from "../../../services/Actions/orderActions.js";
+import { getAllUsers } from "../../../services/Actions/userAction.js";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 const Dashboard = () => {
     const { products } = useSelector((state) => state.productsR);
+    const { orders } = useSelector((state) => state.ordersAR);
+    const { users } = useSelector((state) => state.usersAR);
     const dispatch = useDispatch();
     let outOfStock = 0;
-    let totalAmount = 50000;
+    let totalAmount = 0;
+    orders &&
+        orders.forEach((item) => {
+            totalAmount += item.totalprice;
+        });
     products &&
         products.forEach((item) => {
             if (item.stock === 0) {
@@ -43,6 +51,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         getAllAdminProducts(dispatch);
+        getAllOrders(dispatch);
     }, [dispatch]);
 
     return (
@@ -66,13 +75,11 @@ const Dashboard = () => {
                         </Link>
                         <Link to="/admin/orders">
                             <p>Orders</p>
-                            <p>{0}</p>
-                            {/* <p>{orders && orders.length}</p> */}
+                            <p>{orders && orders.length}</p>
                         </Link>
                         <Link to="/admin/users">
                             <p>Users</p>
-                            <p>{0}</p>
-                            {/* <p>{users && users.length}</p> */}
+                            <p>{users && users.length}</p>
                         </Link>
                     </div>
                 </div>

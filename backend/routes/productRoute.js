@@ -39,13 +39,8 @@ router.route("/product/:id").get(getProduct);
 // review
 router.route("/review").put(isAuthenticatedUser, createProductReview);
 
-// getAll product reviews
 router
     .route("/reviews")
-    .get(isAuthenticatedUser, authorizeRoles("admin"), getAllReviews);
-// delete product reviews
-router
-    .route("/review")
     .get(getProductReviews)
     .delete(isAuthenticatedUser, deleteReviews);
 export default router;
